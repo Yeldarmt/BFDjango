@@ -24,9 +24,9 @@ class Command(BaseCommand):
             prefix = 'AA'
 
         for i in range(total):
-                b = Todo.objects.create(name=f'{prefix}_todo {i}',
-                                        description=f'todo {i} description',
-                                        completed=i % 2 == 0,
-                                        created_by_id=1
-                                        )
-                self.stdout.write(f'Todo {b.id} was created')
+            b = Todo.objects.create(title=f'{prefix}_todo {i}',
+                                    description=f'todo {i} description',
+                                    completed=i % 2 == 0,
+                                    created_by_id=1
+                                    )
+            self.stdout.write(f'Todo {b.id} was created')

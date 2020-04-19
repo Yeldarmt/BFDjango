@@ -5,12 +5,12 @@ from rest_framework import serializers
 
 class TodoManager(models.Manager):
     def for_user(self, user):
-        return self.objects.filter(created_by=user)
+        return self.get_queryset().filter(created_by=user)
 
 
 class CompletedTodoManager(models.Manager):
     def get_queryset(self):
-        return self.filter(completed=True)
+        return super(CompletedTodoManager, self).get_queryset().filter(completed=True)
 
 
 class MyUser(AbstractUser):
@@ -51,7 +51,7 @@ class Todo(models.Model):
     completed = models.BooleanField(default=False)
     created_by = models.ForeignKey(MyUser, on_delete=models.CASCADE, default=1)
     objects = TodoManager()
-    completed_books = CompletedTodoManager()
+    completed_todos = CompletedTodoManager()
 
     class Meta:
         verbose_name = 'Todo'
