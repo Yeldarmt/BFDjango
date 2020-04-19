@@ -18,7 +18,7 @@ class TodoViewSet(viewsets.GenericViewSet,
         return TodoShortSerializer
 
     def get_queryset(self):
-        return Todo.objects.filter(created_by=self.request.user)
+        return Todo.objects.for_user(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save()
